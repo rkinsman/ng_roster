@@ -1,6 +1,7 @@
 <!doctype html>
 <html ng-app="rosterApp">
 <head>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
@@ -9,8 +10,11 @@
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
-	<div ng-controller="RosterCtrl" class="container">
-		<h2 class="offset4">{{rosterName}}</h2>
+	<div ng-controller="RosterCtrl" class="container">		
+			<h2 class="offset4">
+				<div hideonhoverparent>{{rosterName}}</div>
+				<input ng-model="rosterName" class="input-medium" style="display:none" value="{{rosterName}}" showonhoverparent>
+			</h2>
 		<table class="table-striped table-bordered span9 offset1" ng-hide="noRoster()">
 				<thead>
 					<tr>
@@ -24,19 +28,19 @@
 					<tr ng-repeat="player in roster">
 						<td>{{player.name}}</td>
 						<td> 
-							<span ng-show="player.getPosition()">{{player.position}}</span>
-							<select ng-model="player.position" ng-show="!player.position">
+							<span hideonhoverparent>{{player.position}}</span>
+							<select ng-model="player.position" showonhoverparent>
 								<option>Handler</option>
 								<option>Cutter</option>
 							</select>
 						</td>
 						<td>
-							<span ng-show="player.getNumber()">{{player.number}}</span>
-							<input ng-model="player.number" ng-show="!player.number" class="input-mini"></input>
+							<span hideonhoverparent>{{player.number}}</span>
+							<input ng-model="player.number" class="input-mini" showonhoverparent>
 						</td>
 						<td>
-							<span ng-show="player.getEmail()">{{player.email}}</span>
-							<input ng-model="player.email" ng-show="!player.email" class="input-medium"></input>
+							<span hideonhoverparent>{{player.email}}</span>						
+							<input ng-model="player.email" class="input-medium" showonhoverparent>
 						</td>
 					</tr>
 				</tbody>

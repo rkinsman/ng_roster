@@ -2,9 +2,8 @@ var app = angular.module('rosterApp', []);
 
 
 
-//	***************
-//	* Controllers *
-//	***************
+//	*	*	*	*	*	*	*	*	*	*	*	*	*	Controllers	*	*	*	*	*	*	*	*	*	*	*	*	*	
+
 
 app.controller('RosterCtrl', function($scope){
 
@@ -35,9 +34,8 @@ app.controller('RosterCtrl', function($scope){
 });
 
 
-//	**************
-//	* Directives *
-//	**************
+
+//	*	*	*	*	*	*	*	*	*	*	*	*	*	Directives	*	*	*	*	*	*	*	*	*	*	*	*	*	
 
 
 //	from Christian Grobmeier
@@ -51,6 +49,20 @@ app.directive('showonhoverparent',
             });
             element.parent().bind('mouseleave', function() {
                  element.hide();
+            });
+       }
+   };
+});
+
+app.directive('hideonhoverparent',
+   function() {
+      return {
+         link : function(scope, element, attrs) {
+            element.parent().bind('mouseenter', function() {
+                element.hide();
+            });
+            element.parent().bind('mouseleave', function() {
+                 element.show();
             });
        }
    };
