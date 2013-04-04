@@ -1,28 +1,50 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="rosterApp">
 <head>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
-	<script type="text/javascript" src="roster.js"></script>
+	<script type="text/javascript" src="main.js"></script>
 
 	<link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css" rel="stylesheet">
 </head>
 <body>
-	<div ng-controller="RosterCtrl">
-		<h2>{{rosterName}}</h2>
-		<ul class="unstyled">
-				<li ng-repeat="player in roster">
-					{{player.name}}
-					<span ng-show="player.getPosition()">{{player.position}}</span>
-					<select ng-model="player.position" ng-show="!player.position">
-							<option>Handler</option>
-							<option>Cutter</option>
-					</select>
-				</li>
-		</ul>
-		<input type="text" ng-model="newPlayer" ng-model-instant></input>
-		<button class="btn" ng-click="addPlayer()"><i class="icon-plus"></i></button>
+	<div ng-controller="RosterCtrl" class="container">
+		<h2 class="offset4">{{rosterName}}</h2>
+		<table class="table-striped table-bordered span9 offset1" ng-hide="noRoster()">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Position</th>
+						<th>Number</th>
+						<th>email</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="player in roster">
+						<td>{{player.name}}</td>
+						<td> 
+							<span ng-show="player.getPosition()">{{player.position}}</span>
+							<select ng-model="player.position" ng-show="!player.position">
+								<option>Handler</option>
+								<option>Cutter</option>
+							</select>
+						</td>
+						<td>
+							<span ng-show="player.getNumber()">{{player.number}}</span>
+							<input ng-model="player.number" ng-show="!player.number" class="input-mini"></input>
+						</td>
+						<td>
+							<span ng-show="player.getEmail()">{{player.email}}</span>
+							<input ng-model="player.email" ng-show="!player.email" class="input-medium"></input>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+		<div class="well span3 offset4 input-append">
+			<input type="text" class="input-medium" ng-model="newPlayer" ng-model-instant></input>
+			<button class="btn" ng-click="addPlayer()"><i class="icon-plus"></i>Add a Player</button>
+		</div>
 	</div>
 </body>
 </html>
