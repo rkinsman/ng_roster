@@ -7,17 +7,32 @@ var app = angular.module('rosterApp', []);
 
 app.controller('RosterCtrl', function($scope){
 
-	$scope.rosterName = 'Name your team';
+	$scope.rosterName = {
+    name : "Name your team",
+    editing : true,
+    isEditing : function(){
+      return this.editing;
+    },
+    edit : function(){
+      this.editing = true;
+    },
+    save : function(){
+      this.editing = false;
+    }
+  };
+
 	$scope.roster = []; 
 
 	$scope.noRoster = function(){return !$scope.roster.length;};
 
 	$scope.addPlayer = function(){
+
 		$scope.roster.push({
 			name : $scope.newPlayer, 
 			position :'', 
 			number : null, 
-			email : '', 
+			email : '',
+      editing : true, 
 			getPosition : function(){
 				return this.position;
 			},
@@ -26,7 +41,17 @@ app.controller('RosterCtrl', function($scope){
 			},
 			getEmail : function(){
 				return this.email;
-			}
+			},
+      edit : function(){
+        this.editing = true;
+      },
+      save : function(){
+        this.editing = false;
+      },
+      isEditing : function(){
+        return this.editing;
+      }
+
 		});
 
 		$scope.newPlayer.text = '';

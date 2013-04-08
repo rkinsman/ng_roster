@@ -12,42 +12,57 @@
 <body>
 	<div ng-controller="RosterCtrl" class="container">		
 			<h2 class="offset4">
-				<div hideonhoverparent>{{rosterName}}</div>
-				<input ng-model="rosterName" class="input-medium" style="display:none" value="{{rosterName}}" showonhoverparent>
+				<input ng-model="rosterName.name" class="input-medium" ng-hide="!rosterName.isEditing()">
+				<span ng-hide="rosterName.isEditing()">{{rosterName.name}}</span>
+				<button class="btn" ng-hide="rosterName.isEditing()" ng-click="rosterName.edit()">
+					<i class="icon-edit"></i> Edit
+				</button>
+				<button class="btn" ng-hide="!rosterName.isEditing()" ng-click="rosterName.save()">
+					<i class="icon-ok"></i> Save
+				</button>
 			</h2>
-		<table class="table-striped table-bordered span9 offset1" ng-hide="noRoster()">
+		<table class="well table-striped table-bordered span9 offset1" >
 				<thead>
 					<tr>
 						<th>Name</th>
 						<th>Position</th>
 						<th>Number</th>
-						<th>email</th>
+						<th>E-mail</th>
+						<th>Action</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody ng-hide="noRoster()">
 					<tr ng-repeat="player in roster">
 						<td>{{player.name}}</td>
 						<td> 
-							<span hideonhoverparent>{{player.position}}</span>
-							<select ng-model="player.position" showonhoverparent>
+							<div ng-hide="player.isEditing()">{{player.position}}</div>
+							<select ng-model="player.position" ng-hide="!player.isEditing()">
 								<option>Handler</option>
 								<option>Cutter</option>
 							</select>
 						</td>
 						<td>
-							<span hideonhoverparent>{{player.number}}</span>
-							<input ng-model="player.number" class="input-mini" showonhoverparent>
+							<div ng-hide="player.isEditing()">{{player.number}}</div>
+							<input ng-model="player.number" class="input-mini" ng-hide="!player.isEditing()">
 						</td>
 						<td>
-							<span hideonhoverparent>{{player.email}}</span>						
-							<input ng-model="player.email" class="input-medium" showonhoverparent>
+							<div ng-hide="player.isEditing()">{{player.email}}</div>						
+							<input ng-model="player.email" class="input-medium" ng-hide="!player.isEditing()">
+						</td>
+						<td>
+							<button class="btn" ng-hide="player.isEditing()" ng-click="player.edit()">
+								<i class="icon-edit"></i> Edit
+							</button>
+							<button class="btn" ng-hide="!player.isEditing()" ng-click="player.save()">
+								<i class="icon-ok"></i> Save
+							</button>
 						</td>
 					</tr>
 				</tbody>
 		</table>
 		<div class="well span3 offset4 input-append">
 			<input type="text" class="input-medium" ng-model="newPlayer" ng-model-instant></input>
-			<button class="btn" ng-click="addPlayer()"><i class="icon-plus"></i>Add a Player</button>
+			<button class="btn" ng-click="addPlayer()"><i class="icon-plus"></i> Add a Player</button>
 		</div>
 	</div>
 </body>
